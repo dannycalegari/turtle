@@ -41,16 +41,32 @@ cpx I (0.0,1.0);
 #include "draw.cc"
 #include "eps.cc"
 #include "interface.cc"
+#include "variance.cc"
 
 int main(int argc, char *argv[]){ 
 	double ANGLE, LENGTH;
 	int seed;
-	ANGLE=0.6;
-	LENGTH=0.05;
+	
+	/*
+	int i,j;
+	LENGTH=0.00;
+	for(j=0;j<20;j++){
+		cout << "[ ";
+		ANGLE=0.0;
+		for(i=0;i<20;i++){
+			compute_variance(ANGLE,LENGTH);
+			ANGLE=ANGLE+PI/80.0;
+		};
+		LENGTH=LENGTH+0.025;
+		cout << "]\n";
+	};
+	*/
 	
 	cout << "Welcome to hyperbolic turtles!\n";
-	cout << "Initial step length is " << LENGTH << "\n";
-	cout << "Initial turning angle is " << ANGLE*2.0 << "\n";
+	cout << "Enter initial step length: ";
+	cin >> LENGTH;
+	cout << "Enter initial turning angle: ";
+	cin >> ANGLE;
 	cout << "Enter initial seed: ";
 	cin >> seed;
 	cout << "Starting graphics.\n";

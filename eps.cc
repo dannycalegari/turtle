@@ -55,10 +55,10 @@ void eps_geodesic_segments(double ANGLE, double LENGTH, int seed){
 	v[1]=1.0;
 	S.push_back(v);
 	R=S;
-	R[0][0]=cos(ANGLE)+sin(ANGLE)*I;
+	R[0][0]=cos(ANGLE/2.0)+sin(ANGLE/2.0)*I;
 	R[0][1]=0.0;
 	R[1][0]=0.0;
-	R[1][1]=cos(ANGLE)-sin(ANGLE)*I;
+	R[1][1]=cos(ANGLE/2.0)-sin(ANGLE/2.0)*I;
 	L=R;
 	L[0][0]=R[1][1];
 	L[1][1]=R[0][0];
@@ -86,7 +86,7 @@ void eps_geodesic_segments(double ANGLE, double LENGTH, int seed){
 	output_file << "/Helvetica findfont \n";
 	output_file << "0.075 scalefont setfont \n";
 	output_file << "newpath -0.95 -1.12 moveto \n";
-	output_file << "( step length " << LENGTH << " turning angle " << ANGLE*2.0 << " random seed " << seed << ") show \n";
+	output_file << "( step length " << LENGTH << " turning angle " << ANGLE << " random seed " << seed << ") show \n";
 	output_file << "grestore %eof \n";
 	output_file.close();
 };

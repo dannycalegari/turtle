@@ -49,10 +49,10 @@ void geodesic_segments(double ANGLE, double LENGTH, int seed){
 	v[1]=1.0;
 	S.push_back(v);
 	R=S;
-	R[0][0]=cos(ANGLE)+sin(ANGLE)*I;
+	R[0][0]=cos(ANGLE/2.0)+sin(ANGLE/2.0)*I;
 	R[0][1]=0.0;
 	R[1][0]=0.0;
-	R[1][1]=cos(ANGLE)-sin(ANGLE)*I;
+	R[1][1]=cos(ANGLE/2.0)-sin(ANGLE/2.0)*I;
 	L=R;
 	L[0][0]=R[1][1];
 	L[1][1]=R[0][0];
