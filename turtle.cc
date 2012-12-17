@@ -48,17 +48,9 @@ int main(int argc, char *argv[]){
 	int seed;
 	
 	/*
-	int i,j;
-	LENGTH=0.00;
-	for(j=0;j<20;j++){
-		cout << "[ ";
-		ANGLE=0.0;
-		for(i=0;i<20;i++){
-			compute_variance(ANGLE,LENGTH);
-			ANGLE=ANGLE+PI/80.0;
-		};
-		LENGTH=LENGTH+0.025;
-		cout << "]\n";
+	LENGTH=0.05;
+	for(ANGLE=0.095;ANGLE<0.2;ANGLE=ANGLE+0.005){
+		compute_variance(ANGLE,LENGTH);
 	};
 	*/
 	
