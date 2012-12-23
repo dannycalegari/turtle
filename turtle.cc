@@ -48,7 +48,6 @@ int main(int argc, char *argv[]){
 	double ANGLE, LENGTH;
 	int seed;
 	
-/*
 	
 	cout << "Welcome to hyperbolic turtles!\n";
 	cout << "Enter initial step length: ";
@@ -71,7 +70,7 @@ int main(int argc, char *argv[]){
 		user_interface(ANGLE,LENGTH,seed);
 	};
 	
-*/
+/*
 	cmat S;
 	cvec v;
 	v.push_back(1.0);
@@ -87,6 +86,7 @@ int main(int argc, char *argv[]){
 	XFlush(display);
 	while(1){
 	};
+	*/
 	
 	return(0);
 };
