@@ -42,17 +42,13 @@ cpx I (0.0,1.0);
 #include "eps.cc"
 #include "interface.cc"
 #include "variance.cc"
+#include "program.cc"
 
 int main(int argc, char *argv[]){ 
 	double ANGLE, LENGTH;
 	int seed;
 	
-	/*
-	LENGTH=0.05;
-	for(ANGLE=0.095;ANGLE<0.2;ANGLE=ANGLE+0.005){
-		compute_variance(ANGLE,LENGTH);
-	};
-	*/
+/*
 	
 	cout << "Welcome to hyperbolic turtles!\n";
 	cout << "Enter initial step length: ";
@@ -73,6 +69,23 @@ int main(int argc, char *argv[]){
 	XFlush(display);
 	while(1){
 		user_interface(ANGLE,LENGTH,seed);
+	};
+	
+*/
+	cmat S;
+	cvec v;
+	v.push_back(1.0);
+	v.push_back(0.0);
+	S.push_back(v);
+	v[0]=0.0;
+	v[1]=1.0;
+	S.push_back(v);
+	
+	setup_graphics();
+	draw_grid(0, 10, PI/7.0, 0.5, S);
+
+	XFlush(display);
+	while(1){
 	};
 	
 	return(0);
