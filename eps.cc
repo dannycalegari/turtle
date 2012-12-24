@@ -6,7 +6,7 @@ void eps_geodesic(cpx u, cpx v, ofstream &output_file){
 	double angle1, angle2;
 	double A1, A2, A;
 	z=u/v;
-	if(abs(z.imag())<0.01 || abs(u-v)<0.01){
+	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(v)<0.01){
 		output_file << u.real() << " " << u.imag() << " " << v.real() << " " << v.imag() << " l \n";
 	} else {
 		z=circumcenter(u,invert(u),v);	

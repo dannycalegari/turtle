@@ -34,6 +34,40 @@ void geodesic(cpx u, cpx v){
 	return;
 };
 
+void red_geodesic(cpx u, cpx v){
+	cpx z;
+	double r;
+	double angle1, angle2;
+	int R,A1,A2,A;
+	z=u/v;
+	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(v)<0.01){
+		draw_line(cpx_to_point(u),cpx_to_point(v),16711680);
+		draw_dot(cpx_to_point(u),0);
+		draw_dot(cpx_to_point(v),0);
+	} else {
+		z=circumcenter(u,invert(u),v);	
+		draw_dot(cpx_to_point(u),0);
+		draw_dot(cpx_to_point(v),0);
+		r=abs(u-z);	// radius
+		R=(int) (r*400.0);
+		angle1=arg(u-z);
+		angle2=arg(v-z);
+		A1=(int) (angle1*23040.0/TWOPI);
+		A2=(int) (angle2*23040.0/TWOPI);
+		A=A2-A1;
+		while(A<0){
+			A=A+23040;
+		};
+		A=A%23040;
+		if(A>11520){
+			draw_arc(cpx_to_point(z),R,A2,23040-A,16711680);
+		} else {
+			draw_arc(cpx_to_point(z),R,A1,A,16711680);
+		};
+	};
+	return;
+};
+
 void geodesic_segments(double ANGLE, double LENGTH, int seed){
 
 	draw_circle(cpx_to_point(0.0),400,0);	// boundary circle
