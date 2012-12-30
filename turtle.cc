@@ -63,6 +63,8 @@ int main(int argc, char *argv[]){
 		cout << "Press [q] to quit.\n";
 	
 		setup_graphics();
+//		horocycle(ANGLE);
+//		eps_horocycle(ANGLE);
 		geodesic_segments(ANGLE,LENGTH,seed);
 
 		XFlush(display);
@@ -70,39 +72,37 @@ int main(int argc, char *argv[]){
 			user_interface(ANGLE,LENGTH,seed);
 		};
 	} else {
+		cmat S;
+		cvec v;
+		v.push_back(1.0);
+		v.push_back(0.0);
+		S.push_back(v);
+		v[0]=0.0;
+		v[1]=1.0;
+		S.push_back(v);
 	
-	cmat S;
-	cvec v;
-	v.push_back(1.0);
-	v.push_back(0.0);
-	S.push_back(v);
-	v[0]=0.0;
-	v[1]=1.0;
-	S.push_back(v);
-	
-	
-	ofstream output_file;
-	output_file.open("7-3.eps");
-	output_file << "%!PS-Adobe-2.0 EPSF-2.0 \n";
-	output_file << "%%BoundingBox: 0 0 440 440 \n";
-	output_file << "gsave 200 200 scale 1 400 div setlinewidth 1.1 1.1 translate \n";
-	output_file << "/l {4 dict begin /y2 exch def /x2 exch def /y1 exch def /x1 exch def \n";
-	output_file << "newpath x1 y1 moveto x2 y2 lineto stroke end} def \n";
-	output_file << "/c {5 dict begin /a2 exch def /a1 exch def /r exch def /c2 exch def \n";
-	output_file << "/c1 exch def newpath c1 c2 r a1 a2 arc stroke end} def \n";
-	output_file << "0 0 1 0 360 c \n";	// boundary circle
+		ofstream output_file;
+		output_file.open("7-3.eps");
+		output_file << "%!PS-Adobe-2.0 EPSF-2.0 \n";
+		output_file << "%%BoundingBox: 0 0 440 440 \n";
+		output_file << "gsave 200 200 scale 1 400 div setlinewidth 1.1 1.1 translate \n";
+		output_file << "/l {4 dict begin /y2 exch def /x2 exch def /y1 exch def /x1 exch def \n";
+		output_file << "newpath x1 y1 moveto x2 y2 lineto stroke end} def \n";
+		output_file << "/c {5 dict begin /a2 exch def /a1 exch def /r exch def /c2 exch def \n";
+		output_file << "/c1 exch def newpath c1 c2 r a1 a2 arc stroke end} def \n";
+		output_file << "0 0 1 0 360 c \n";	// boundary circle
 	
 	
-	setup_graphics();
-	draw_grid(0, 7, PI/7.0, 0.5, S, output_file);
-	draw_extra_lines(PI/7.0, 0.5, S, output_file);
+		setup_graphics();
+		draw_grid(0, 7, PI/7.0, 0.5, S, output_file);
+		draw_extra_lines(PI/7.0, 0.5, S, output_file);
 	
-	output_file << "grestore %eof \n";
-	output_file.close();
+		output_file << "grestore %eof \n";
+		output_file.close();
 
-	XFlush(display);
-	while(1){
-	};
+		XFlush(display);
+		while(1){
+		};
 	};
 	
 	return(0);
