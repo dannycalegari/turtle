@@ -42,11 +42,26 @@ cpx I (0.0,1.0);
 #include "eps.cc"
 #include "interface.cc"
 #include "variance.cc"
+#include "endpoint.cc"
 #include "program.cc"
 
 int main(int argc, char *argv[]){ 
 	double ANGLE, LENGTH;
 	int seed;
+	
+	/*
+	
+	int i;
+	LENGTH=0.125;
+	ANGLE=0.0;
+	cout << "[ ";
+	for(i=0;i<=4000;i++){
+		compute_endpoint(ANGLE, LENGTH, 17);
+		ANGLE=ANGLE+PI/4000.0;
+	};
+	cout << "]\n";
+
+	*/
 	
 	/*
 	int i,j;
