@@ -1,42 +1,27 @@
 /* variance.cc */
 
 void compute_variance(double ANGLE, double LENGTH){
-	cmat S,R,L,C,D;
 	cvec v;
-	double det;
-	double A, turning_angle, V;
-	det=sqrt(1.0-LENGTH*LENGTH);
-	v.push_back(1.0/det);
-	v.push_back(LENGTH/det);
-	S.push_back(v);
-	v[0]=LENGTH/det;
-	v[1]=1.0/det;
-	S.push_back(v);
-	R=S;
-	R[0][0]=cos(ANGLE)+sin(ANGLE)*I;
-	R[0][1]=0.0;
-	R[1][0]=0.0;
-	R[1][1]=cos(ANGLE)-sin(ANGLE)*I;
-	L=R;
-	L[0][0]=R[1][1];
-	L[1][1]=R[0][0];
+	double A, turning_angle, V,angle;
 	
 	int i,j,k;
 	cpx z,w;
 	
 	V=0.0;
-	cout << "angle " << ANGLE << " length " << LENGTH << " variance ";
-	for(k=0;k<10000;k++){	// number of trials
+//	cout << "angle " << ANGLE << " length " << LENGTH << " variance ";
+	for(k=0;k<50000;k++){	// number of trials
 		z=1.0;
+		angle=0.0;
 		turning_angle=0.0;
 		for(i=0;i<1000;i++){
+			z=(z+LENGTH)/(LENGTH*z+1.0);
 			j=rand()%2;
 			if(j==0){
-				w=mobius(S*L,z);
+				w=z*(cos(ANGLE)+sin(ANGLE)*I);
 			} else {
-				w=mobius(S*R,z);
+				w=z*(cos(ANGLE)-sin(ANGLE)*I);
+			
 			};
-			w=w/abs(w);
 			A=arg(w)-arg(z);
 			if(A>PI){
 			//	cout << "positive jump ";
@@ -51,12 +36,13 @@ void compute_variance(double ANGLE, double LENGTH){
 			//	cout << "turning angle " << turning_angle << "\n";
 			};
 			z=w;
+	//		cout << "z is " << z << " turning angle is " << turning_angle << "\n";
 		};
 		V=V+(turning_angle*turning_angle);
 	//	cout << turning_angle << " ";
 	//	cout.flush();
 	};
-	V=V/100.0;
-	cout << V << "\n";
+	V=V/1500000.0;
+	cout << V << " ";
 	cout.flush();
 };

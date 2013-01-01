@@ -48,6 +48,21 @@ int main(int argc, char *argv[]){
 	double ANGLE, LENGTH;
 	int seed;
 	
+	/*
+	int i,j;
+	LENGTH=0.0;
+	for(i=0;i<=40;i++){
+		cout << "[ ";
+		ANGLE=0.0;
+		for(j=0;j<=40;j++){
+			compute_variance(ANGLE, LENGTH);
+			ANGLE=ANGLE+PI/160.0;
+		};
+		cout << " ]";
+		LENGTH=LENGTH+0.00625;
+	};
+	*/
+	
 	if(argc==1){
 		cout << "Welcome to hyperbolic turtles!\n";
 		cout << "Enter initial step length: ";
