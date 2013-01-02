@@ -41,3 +41,28 @@ void compute_endpoint(double ANGLE, double LENGTH, int seed){
 	cout << arg(mobius(D,z)) << " ";
 	cout.flush();
 };
+
+double expo(int n, double s){	// returns n^s
+	double N;
+	N=(double) n;
+	return(exp(log(n)*s));
+};
+
+void compute_series(double s, int seed, int L){
+/* seed determines an iid sequence c_i equal to +1 or -1
+    define L(s) = \sum_n c_n n^{-s} and look at the behavior of s */
+	srand(seed);
+	int n,j;
+	double v;
+	v=0.0;
+	for(n=1;n<L;n++){
+		j=rand()%2;
+		if(j==0){
+			v=v+expo(n,-s);
+		} else {
+			v=v-expo(n,-s);
+		};
+	};
+	cout << v << " ";
+	cout.flush();
+};
