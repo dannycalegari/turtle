@@ -1,5 +1,5 @@
-turtle version 1.1; January 5, 2013
-===================================
+**turtle** version 1.1; January 5, 2013
+=======================================
 
 Turtle logo in the hyperbolic plane. This is an obvious variation on the Logo
 programming language, created in 1967 for educational use by Wally Feurzeig and
