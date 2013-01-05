@@ -39,8 +39,14 @@ the commands is as follows:
 * [e] means end program; i is ignored
 
 After entering the program (i.e. after entering the command "e 0") the
-turtle's trajectory is calculated and drawn. (to do: allow the ability to
-save as an .eps file)
+turtle's trajectory is calculated and drawn. 
+
+
+to dos
+------
+* add the ability to save result of programming as an .eps file
+* add programming commands to save and restore state
+* add syntax for recursive procedures
 
 
 copyright
