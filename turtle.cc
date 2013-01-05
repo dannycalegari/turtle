@@ -51,49 +51,53 @@ int main(int argc, char *argv[]){
 	double ANGLE, LENGTH;
 	int seed;
 	
-	if(argc==1){	// random mode (default)
-		cout << "Welcome to hyperbolic turtles!\n";
-		cout << "I will draw a random turtle trajectory.\n";
-		cout << "Enter initial step length: ";
-		cin >> LENGTH;
-		cout << "Enter initial turning angle: ";
-		cin >> ANGLE;
-		cout << "Enter initial seed: ";
-		cin >> seed;
-		cout << "Starting graphics.\n";
-		cout << "Use arrow keys to adjust length and angle.\n";
-		cout << "Press [s] to increment random seed.\n";
-		cout << "Press [e] to output to .eps file.\n";
-		cout << "Press [q] to quit.\n";
-	
-		setup_graphics();
-		geodesic_segments(ANGLE,LENGTH,seed);
+	if(argc==1){
+		cout << "Type turtle -r for random mode, turtle -p for programming mode.\n";
+	} else {
+		if(strcmp(argv[1],"-r")==0){	// random mode 
+			cout << "Welcome to hyperbolic turtles!\n";
+			cout << "I will draw a random turtle trajectory.\n";
+			cout << "Enter initial step length: ";
+			cin >> LENGTH;
+			cout << "Enter initial turning angle: ";
+			cin >> ANGLE;
+			cout << "Enter initial seed: ";
+			cin >> seed;
+			cout << "Starting graphics.\n";
+			cout << "Use arrow keys to adjust length and angle.\n";
+			cout << "Press [s] to increment random seed.\n";
+			cout << "Press [e] to output to .eps file.\n";
+			cout << "Press [q] to quit.\n";
+		
+			setup_graphics();
+			geodesic_segments(ANGLE,LENGTH,seed);
 
-		XFlush(display);
-		while(1){
-			user_interface(ANGLE,LENGTH,seed);
-		};
-	} else {	// programming mode; should need switch -p
-		turtle_program T;
-		long pen_color;
+			XFlush(display);
+			while(1){
+				user_interface(ANGLE,LENGTH,seed);
+			};
+		} else {	// programming mode; (default)
+			turtle_program T;
+			long pen_color;
+			
+			cmat turtle_state;
+			turtle_state=forward_mat(0.0);
+			pen_color=0;
 		
-		cmat turtle_state;
-		turtle_state=forward_mat(0.0);
-		pen_color=0;
+			cout << "Welcome to hyperbolic turtles!\n";
+			cout << "Enter turtle program.\n";
+			input_program(T);
+			cout << "Now executing program.\n";
+			cout << "Press [q] to quit.\n";
 		
-		cout << "Welcome to hyperbolic turtles!\n";
-		cout << "Enter turtle program.\n";
-		input_program(T);
-		cout << "Now executing program.\n";
-		cout << "Press [q] to quit.\n";
+			setup_graphics();
 		
-		setup_graphics();
-		
-		draw_circle(cpx_to_point(0.0),400,0);	// boundary circle
-		execute_program(T,turtle_state,pen_color);
-		XFlush(display);
-		while(1){
-			program_user_interface();
+			draw_circle(cpx_to_point(0.0),400,0);	// boundary circle
+			execute_program(T,turtle_state,pen_color);
+			XFlush(display);
+			while(1){
+				program_user_interface();
+			};
 		};
 	};
 	

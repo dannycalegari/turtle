@@ -18,8 +18,8 @@ struct turtle_command{
 void input_program(turtle_program &T){
 	cout << "A turtle program is a list of commands of the form c i\n";
 	cout << "where c is a letter and i is a number (an integer)\n";
-	cout << "[p] means pen color; i is the RGB color value.\n";
-	cout << "[f] means forward; i is the step (measured at the origin).\n";
+	cout << "[p] means pen color; i (0-7) is the RGB color value.\n";
+	cout << "[f] means forward; i is the step (100 is infinite).\n";
 	cout << "[r] means rotate; i is the angle (in degrees).\n";
 	cout << "[l] means start loop; i is the number of iterations.\n";
 	cout << "[c] means close loop; i is ignored.\n";
@@ -27,10 +27,12 @@ void input_program(turtle_program &T){
 	T.clear();	// should initialize T
 	turtle_command N;
 	char c;
-	int i;
+	int i,j;
 	bool finish;
 	finish=false;
+	j=0;
 	while(finish==false){
+		cout << j << "   ";
 		cin >> c >> i;
 		N.c=c;
 		N.i=i;
@@ -38,6 +40,7 @@ void input_program(turtle_program &T){
 		if(N.c=='e'){
 			finish=true;
 		};
+		j++;
 	};
 	return;
 };
