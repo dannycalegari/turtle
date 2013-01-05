@@ -29,6 +29,7 @@ using namespace std;
 #define TWOPI	6.28318530717959
 #define cpx		complex<double>				// complex number
 #define cvec 	vector<cpx >	// vector of complex numbers
+#define ivec	vector<int >	// vector of integers
 #define cmat	vector< vector<cpx > >		// matrix of complex
 
 // global constants
@@ -43,41 +44,16 @@ cpx I (0.0,1.0);
 #include "interface.cc"
 #include "variance.cc"
 #include "endpoint.cc"
+#include "draw_grid.cc"
 #include "program.cc"
 
 int main(int argc, char *argv[]){ 
 	double ANGLE, LENGTH;
 	int seed;
 	
-	/*	
-	int i;
-	LENGTH=0.125;
-	ANGLE=0.0;
-	cout << "[ ";
-	for(i=0;i<=4000;i++){
-		compute_endpoint(ANGLE, LENGTH, 17);
-		ANGLE=ANGLE+PI/4000.0;
-	};
-	cout << "]\n";
-	*/
-	
-	/*
-	int i,j;
-	LENGTH=0.0;
-	for(i=0;i<=40;i++){
-		cout << "[ ";
-		ANGLE=0.0;
-		for(j=0;j<=40;j++){
-			compute_variance(ANGLE, LENGTH);
-			ANGLE=ANGLE+PI/160.0;
-		};
-		cout << " ]";
-		LENGTH=LENGTH+0.00625;
-	};
-	*/
-	
-	if(argc==1){
+	if(argc==1){	// random mode (default)
 		cout << "Welcome to hyperbolic turtles!\n";
+		cout << "I will draw a random turtle trajectory.\n";
 		cout << "Enter initial step length: ";
 		cin >> LENGTH;
 		cout << "Enter initial turning angle: ";
@@ -91,45 +67,33 @@ int main(int argc, char *argv[]){
 		cout << "Press [q] to quit.\n";
 	
 		setup_graphics();
-//		horocycle(ANGLE);
-//		eps_horocycle(ANGLE);
 		geodesic_segments(ANGLE,LENGTH,seed);
 
 		XFlush(display);
 		while(1){
 			user_interface(ANGLE,LENGTH,seed);
 		};
-	} else {
-		cmat S;
-		cvec v;
-		v.push_back(1.0);
-		v.push_back(0.0);
-		S.push_back(v);
-		v[0]=0.0;
-		v[1]=1.0;
-		S.push_back(v);
-	
-		ofstream output_file;
-		output_file.open("7-3.eps");
-		output_file << "%!PS-Adobe-2.0 EPSF-2.0 \n";
-		output_file << "%%BoundingBox: 0 0 440 440 \n";
-		output_file << "gsave 200 200 scale 1 400 div setlinewidth 1.1 1.1 translate \n";
-		output_file << "/l {4 dict begin /y2 exch def /x2 exch def /y1 exch def /x1 exch def \n";
-		output_file << "newpath x1 y1 moveto x2 y2 lineto stroke end} def \n";
-		output_file << "/c {5 dict begin /a2 exch def /a1 exch def /r exch def /c2 exch def \n";
-		output_file << "/c1 exch def newpath c1 c2 r a1 a2 arc stroke end} def \n";
-		output_file << "0 0 1 0 360 c \n";	// boundary circle
-	
-	
+	} else {	// programming mode; should need switch -p
+		turtle_program T;
+		long pen_color;
+		
+		cmat turtle_state;
+		turtle_state=forward_mat(0.0);
+		pen_color=0;
+		
+		cout << "Welcome to hyperbolic turtles!\n";
+		cout << "Enter turtle program.\n";
+		input_program(T);
+		cout << "Now executing program.\n";
+		cout << "Press [q] to quit.\n";
+		
 		setup_graphics();
-		draw_grid(0, 7, PI/7.0, 0.5, S, output_file);
-		draw_extra_lines(PI/7.0, 0.5, S, output_file);
-	
-		output_file << "grestore %eof \n";
-		output_file.close();
-
+		
+		draw_circle(cpx_to_point(0.0),400,0);	// boundary circle
+		execute_program(T,turtle_state,pen_color);
 		XFlush(display);
 		while(1){
+			program_user_interface();
 		};
 	};
 	

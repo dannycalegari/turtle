@@ -61,3 +61,23 @@ void user_interface(double &ANGLE, double &LENGTH, int &seed){
         };
     };
 };
+
+void program_user_interface(){
+	bool finished;
+
+	finished=false;
+	while(finished==false){
+		XNextEvent(display, &report);
+		switch(report.type) {
+			case KeyPress:
+				if(XLookupKeysym(&report.xkey, 0) == XK_q){ // quit           
+                    finished=true;
+                    XCloseDisplay(display);
+                    exit(0);
+                    break;
+                };
+            default:
+            	break;
+        };
+    };
+};
