@@ -1,13 +1,14 @@
-/*	turtle.cc	
+/*	turtle.cc
 
-	Random turtles in the hyperbolic plane
+	Version 1.1
 
-	December 15 2012
+	Turtle Logo in the hyperbolic plane
+
+	January 5 2013
 
 	Copyright Danny Calegari
 
-	released under the terms of the GNU GPL
-	
+	released under the terms of the GNU GPL, version 3.0
 */
 
 // standard libraries to include

@@ -1,13 +1,16 @@
 turtle version 1.1; January 5, 2013
 ===================================
 
-Turtle logo in the hyperbolic plane.
+Turtle logo in the hyperbolic plane. This is an obvious variation on the Logo
+programming language, created in 1967 for educational use by Wally Feurzeig and
+Seymour Papert, but has a much more limited set of commands, and a very
+primitive interface.
 
 This program has two modes; *random mode* and *programming mode*.
 
 
-*random mode*
--------------
+random mode
+-----------
 
 To launch in random mode, type ./turtle -r
 
@@ -19,10 +22,10 @@ after the trajectory is calculated and drawn. The image can be saved as an
 .eps file by pressing [e].
 
 
-*programming mode*
-------------------
+programming mode
+----------------
 
-To launch in "programming mode", type ./turtle -p
+To launch in programming mode, type ./turtle -p
 
 In programming mode, the programmer enters a list of commands of the form c i
 where c is a letter (character) and i is a number (integer). The meaning of
