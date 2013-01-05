@@ -39,3 +39,10 @@ the commands is as follows:
 After entering the program (i.e. after entering the command "e 0") the
 turtle's trajectory is calculated and drawn. (to do: allow the ability to
 save as an .eps file)
+
+
+copyright
+---------
+
+This program is released under the terms of the GNU GPL version 3.0. See the
+attached license file.
