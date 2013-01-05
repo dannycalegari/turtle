@@ -1,5 +1,5 @@
-turtle version 1.1; Janurary 5, 2013
-======
+turtle version 1.1; January 5, 2013
+===================================
 
 Turtle logo in the hyperbolic plane.
 
