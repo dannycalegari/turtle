@@ -97,10 +97,10 @@ void execute_program(turtle_program T, cmat &turtle_state, long &pen_color){
 	
 //	cout << "Executing instructions!\n";
 
-	write_program(T);
+//	write_program(T);
 	while(instruction<(int) T.size()){
-		cout << "executing instruction " << instruction << ";   " << T[instruction].c << " " << T[instruction].i << "\n";
-		cout.flush();
+//		cout << "executing instruction " << instruction << ";   " << T[instruction].c << " " << T[instruction].i << "\n";
+//		cout.flush();
 		switch(T[instruction].c){
 			case 'p':
 				pen_color=(255*(T[instruction].i%2))+(255*256*(((T[instruction].i)/2)%2))+(255*256*256*(((T[instruction].i)/4)%2));
@@ -131,7 +131,7 @@ void execute_program(turtle_program T, cmat &turtle_state, long &pen_color){
 			default:
 				break;
 		};
-		XFlush(display);
+//		XFlush(display);
 //		sleep(10000);
 		instruction++;
 	};
