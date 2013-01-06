@@ -6,7 +6,7 @@ void geodesic(cpx u, cpx v){
 	double angle1, angle2;
 	int R,A1,A2,A;
 	z=u/v;
-	if(abs(z.imag())<0.01 || abs(u-v)<0.01){
+	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(u)<0.01 || abs(v)<0.01){
 		draw_line(cpx_to_point(u),cpx_to_point(v),10000000);
 		draw_dot(cpx_to_point(u),0);
 		draw_dot(cpx_to_point(v),0);
@@ -40,7 +40,7 @@ void color_geodesic(cpx u, cpx v, long color){
 	double angle1, angle2;
 	int R,A1,A2,A;
 	z=u/v;
-	if(abs(z.imag())<0.01 || abs(u-v)<0.01){
+	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(u)<0.01 || abs(v)<0.01){
 		draw_line(cpx_to_point(u),cpx_to_point(v),color);
 		draw_dot(cpx_to_point(u),0);
 		draw_dot(cpx_to_point(v),0);
@@ -74,7 +74,7 @@ void red_geodesic(cpx u, cpx v){
 	double angle1, angle2;
 	int R,A1,A2,A;
 	z=u/v;
-	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(v)<0.01){
+	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(u)<0.01 || abs(v)<0.01){
 		draw_line(cpx_to_point(u),cpx_to_point(v),16711680);
 		draw_dot(cpx_to_point(u),0);
 		draw_dot(cpx_to_point(v),0);
