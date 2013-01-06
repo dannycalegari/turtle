@@ -70,6 +70,14 @@ int end_loop_location(turtle_program T, int start_loop_location){
 	};
 };
 
+void write_program(turtle_program T){
+	int i;
+	cout << "program \n";
+	for(i=0;i<(int) T.size();i++){
+		cout << T[i].c << " " << T[i].i << "\n";
+	};
+};
+
 void execute_program(turtle_program T, cmat &turtle_state, long &pen_color){
 	turtle_program S;
 //	long pen_color;
@@ -89,9 +97,10 @@ void execute_program(turtle_program T, cmat &turtle_state, long &pen_color){
 	
 //	cout << "Executing instructions!\n";
 
+	write_program(T);
 	while(instruction<(int) T.size()){
-//		cout << "executing instruction " << instruction << ";   " << T[instruction].c << " " << T[instruction].i << "\n";
-//		cout.flush();
+		cout << "executing instruction " << instruction << ";   " << T[instruction].c << " " << T[instruction].i << "\n";
+		cout.flush();
 		switch(T[instruction].c){
 			case 'p':
 				pen_color=(255*(T[instruction].i%2))+(255*256*(((T[instruction].i)/2)%2))+(255*256*256*(((T[instruction].i)/4)%2));
@@ -117,11 +126,13 @@ void execute_program(turtle_program T, cmat &turtle_state, long &pen_color){
 				for(k=0;k<T[instruction].i;k++){	// T[instruction].i is the number of times to execute the loop
 					execute_program(S,turtle_state,pen_color);	// execute the content of the loop
 				};
-				instruction=j+1;
+				instruction=j;
 				break;
 			default:
 				break;
 		};
+		XFlush(display);
+//		sleep(10000);
 		instruction++;
 	};
 //	cout << "Program executed.\n";
