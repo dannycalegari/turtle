@@ -5,31 +5,51 @@ void geodesic(cpx u, cpx v){
 	double r;
 	double angle1, angle2;
 	int R,A1,A2,A;
-	z=u/v;
-	if(abs(z.imag())<0.01 || abs(u-v)<0.01 || abs(u)<0.01 || abs(v)<0.01){
-		draw_line(cpx_to_point(u),cpx_to_point(v),10000000);
-		draw_dot(cpx_to_point(u),0);
-		draw_dot(cpx_to_point(v),0);
-	} else {
-		z=circumcenter(u,invert(u),v);	
-		draw_dot(cpx_to_point(u),0);
-		draw_dot(cpx_to_point(v),0);
-		r=abs(u-z);	// radius
-		R=(int) (r*400.0);
-		angle1=arg(u-z);
-		angle2=arg(v-z);
-		A1=(int) (angle1*23040.0/TWOPI);
-		A2=(int) (angle2*23040.0/TWOPI);
-		A=A2-A1;
-		while(A<0){
-			A=A+23040;
-		};
-		A=A%23040;
-		if(A>11520){
-			draw_arc(cpx_to_point(z),R,A2,23040-A,10000000);
+	long color;
+	color = 10000000;	// default color
+	if(abs(u)>0.03 && abs(v)>0.03 && abs(u-v)>0.03){	// points are not too close, and far from the origin
+		z=u/v;
+		if(abs(z.imag())<0.03){		// if points are almost on the same radius
+//			cout << u << " " << v << " straight line \n";
+			draw_line(cpx_to_point(u),cpx_to_point(v),color);
+			draw_dot(cpx_to_point(u),0);
+			draw_dot(cpx_to_point(v),0);
 		} else {
-			draw_arc(cpx_to_point(z),R,A1,A,10000000);
+//			cout << u << " " << v << " curved line \n";
+			z=circumcenter(u,invert(u),v);	
+//			cout << "  circumcenter " << z << "\n";
+			draw_dot(cpx_to_point(u),0);
+			draw_dot(cpx_to_point(v),0);
+			r=abs(u-z);	// radius
+//			cout << "  radius " << r << "\n";
+			R=(int) (r*400.0);
+			angle1=arg(u-z);
+			angle2=arg(v-z);
+//			cout << "  angle 1 " << angle1 << "  angle 2 " << angle2 << "\n";
+			A1=(int) (angle1*23040.0/TWOPI);
+			A2=(int) (angle2*23040.0/TWOPI);
+			A=A2-A1;
+			while(A<0){
+				A=A+23040;
+			};
+			A=A%23040;
+//			cout << "  A " << A << "\n";
+			if(A<40 || A>23000){
+//				cout << "  angle too small; drawing straight line after all!\n";
+				draw_line(cpx_to_point(u),cpx_to_point(v),color);		
+			} else {
+				if(A>11520){
+					draw_arc(cpx_to_point(z),R,A2,23040-A,color);
+				} else {
+					draw_arc(cpx_to_point(z),R,A1,A,color);
+				};	
+			};
 		};
+	} else {
+//		cout << u << " " << v << " straight line \n";
+		draw_line(cpx_to_point(u),cpx_to_point(v),color);
+		draw_dot(cpx_to_point(u),0);
+		draw_dot(cpx_to_point(v),0);	
 	};
 	return;
 };
