@@ -58,11 +58,11 @@ int main(int argc, char *argv[]){
 		if(strcmp(argv[1],"-r")==0){	// random mode 
 			cout << "Welcome to hyperbolic turtles!\n";
 			cout << "I will draw a random turtle trajectory.\n";
-			cout << "Enter initial step length: ";
+			cout << "Enter initial step length (1.0 is infinite): ";
 			cin >> LENGTH;
-			cout << "Enter initial turning angle: ";
+			cout << "Enter initial turning angle (in radians): ";
 			cin >> ANGLE;
-			cout << "Enter initial seed: ";
+			cout << "Enter initial seed (an integer): ";
 			cin >> seed;
 			cout << "Starting graphics.\n";
 			cout << "Use arrow keys to adjust length and angle.\n";
