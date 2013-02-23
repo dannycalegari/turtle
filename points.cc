@@ -6,11 +6,15 @@ struct point{	//
 
 point cpx_to_point(cpx w){
     point p;
-    p.x = (int) 500.0+400.0*w.real();
-    p.y = (int) 420.0-400.0*w.imag();
+	if(SMALLSCREEN){
+	    p.x = (int) 250.0+200.0*w.real();
+	    p.y = (int) 250.0-200.0*w.imag();
+	} else {
+		p.x = (int) 500.0+400.0*w.real();
+		p.y = (int) 420.0-400.0*w.imag();
+	};
     return(p);
 };
-
 
 cpx circumcenter(cpx u, cpx v, cpx w){
 	cpx Z,C;

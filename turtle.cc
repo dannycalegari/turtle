@@ -1,10 +1,12 @@
 /*	turtle.cc
 
-	Version 1.1
+	Version 1.2
 
 	Turtle Logo in the hyperbolic plane
 
-	January 5 2013
+	version 1.0 December 15 2012; random walk in hyperbolic plane with prescribed angle and step length
+	version 1.1 January 5 2013; added programming mode
+	version 1.2 February 23 2013; big clean up. incorporated random programming command
 
 	Copyright Danny Calegari
 
@@ -26,6 +28,8 @@ using namespace std;
 
 // preprocessor definitions
 
+#define SMALLSCREEN		0	// for small resolutions, set to 1
+
 #define PI 		3.14159265358979
 #define TWOPI	6.28318530717959
 #define cpx		complex<double>				// complex number
@@ -41,65 +45,62 @@ cpx I (0.0,1.0);
 #include "points.cc"
 #include "graphics.cc"
 #include "draw.cc"
-#include "eps.cc"
+#include "turtle_class.cc"
+#include "input_output.cc"
+#include "elementary_program.cc"
+#include "recursive_program.cc"
 #include "interface.cc"
-#include "variance.cc"
-#include "endpoint.cc"
-#include "draw_grid.cc"
-#include "program.cc"
+
 
 int main(int argc, char *argv[]){ 
-	double ANGLE, LENGTH;
-	int seed;
+	turtle T;
+	ifstream input_file;
+	string R,S = "";
+	bool loaded_program;
 	
-	if(argc==1){
-		cout << "Type turtle -r for random mode, turtle -p for programming mode.\n";
+	loaded_program=false;
+	
+	if(argc<=1){
+		cout << "Welcome to hyperbolic turtle logo!\n";
+		cout << "Usage is as follows.\n";
+		cout << "To read a recursive program from a file, enter ./turtle -r filename\n";
+		cout << "To read an elementary program from a file, enter ./turtle -e filename\n";
+		cout << "To enter an elementary program to cin, enter ./turtle -c\n";
 	} else {
-		if(strcmp(argv[1],"-r")==0){	// random mode 
-			cout << "Welcome to hyperbolic turtles!\n";
-			cout << "I will draw a random turtle trajectory.\n";
-			cout << "Enter initial step length (1.0 is infinite): ";
-			cin >> LENGTH;
-			cout << "Enter initial turning angle (in radians): ";
-			cin >> ANGLE;
-			cout << "Enter initial seed (an integer): ";
-			cin >> seed;
-			cout << "Starting graphics.\n";
-			cout << "Use arrow keys to adjust length and angle.\n";
-			cout << "Press [s] to increment random seed.\n";
-			cout << "Press [e] to output to .eps file.\n";
-			cout << "Press [q] to quit.\n";
-		
-			setup_graphics();
-			geodesic_segments(ANGLE,LENGTH,seed);
-
-			XFlush(display);
-			while(1){
-				user_interface(ANGLE,LENGTH,seed);
-			};
-		} else {	// programming mode; (default)
-			turtle_program T;
-			long pen_color;
-			
-			cmat turtle_state;
-			turtle_state=forward_mat(0.0);
-			pen_color=0;
-		
-			cout << "Welcome to hyperbolic turtles!\n";
-			cout << "Enter turtle program.\n";
-			input_program(T);
-			cout << "Now executing program.\n";
-			cout << "Press [q] to quit.\n";
-		
-			setup_graphics();
-		
-			draw_circle(cpx_to_point(0.0),400,0);	// boundary circle
-			execute_program(T,turtle_state,pen_color);
-			XFlush(display);
-			while(1){
-				program_user_interface();
-			};
+		R=argv[1];
+		if(R=="-r"){
+			S=std::string(argv[2]);
+			input_file.open(S.c_str(), std::fstream::in);
+			T.initialize();
+			T.read_program(input_file);
+			input_file.close();
+			cout << "Enter depth.\n";
+			cin >> T.initial_depth;
+			loaded_program=true;
+		} else if(R=="-e"){
+			S=std::string(argv[2]);
+			input_file.open(S.c_str(), std::fstream::in);
+			T.initialize();
+			T.read_simple_program(input_file);
+			input_file.close();		
+			T.initial_depth=0;
+			loaded_program=true;
+		} else if(R=="-c"){
+			T.initialize();
+			T.enter_program();
+			T.initial_depth=0;
+			loaded_program=true;
+		} else {
+			cout << "option unrecognized!\n";
 		};
+	};
+	if(loaded_program==true){
+		setup_graphics();
+		usleep(100000);
+ 		draw_circle(cpx_to_point(0.0),400,0);   // draw boundary circle
+		T.execute_recursive_program(T.prog, 0, T.initial_depth);
+		XFlush(display);
+		T.user_interface();	
 	};
 	
 	return(0);
