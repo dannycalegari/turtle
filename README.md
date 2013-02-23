@@ -52,6 +52,9 @@ A recursive program is a tuple, consisting of the following:
 * a vector of vectors of integers options[i][j]
 * a vector of vectors of integers transition[i][j]
 
+Although the vectors options[i] may have different length for different i, for each fixed i
+the vectors options[i] and transition[i] must have the same length.
+
 If R is a recursive program, it is executed with the command execute_recursive_program(R, T, D)
 where T is the type, and D is the depth. This means the following:
 
