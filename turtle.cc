@@ -69,22 +69,30 @@ int main(int argc, char *argv[]){
 	} else {
 		R=argv[1];
 		if(R=="-r"){
-			S=std::string(argv[2]);
-			input_file.open(S.c_str(), std::fstream::in);
-			T.initialize();
-			T.read_program(input_file);
-			input_file.close();
-			cout << "Enter depth.\n";
-			cin >> T.initial_depth;
-			loaded_program=true;
+			if(argc<=2){
+				cout << "Usage ./turtle -r filename\n";
+			} else {
+				S=std::string(argv[2]);
+				input_file.open(S.c_str(), std::fstream::in);
+				T.initialize();
+				T.read_program(input_file);
+				input_file.close();
+				cout << "Enter depth.\n";
+				cin >> T.initial_depth;
+				loaded_program=true;
+			};
 		} else if(R=="-e"){
-			S=std::string(argv[2]);
-			input_file.open(S.c_str(), std::fstream::in);
-			T.initialize();
-			T.read_simple_program(input_file);
-			input_file.close();		
-			T.initial_depth=0;
-			loaded_program=true;
+			if(argc<=2){
+				cout << "Usage ./turtle -e filename\n";
+			} else {
+				S=std::string(argv[2]);
+				input_file.open(S.c_str(), std::fstream::in);
+				T.initialize();
+				T.read_simple_program(input_file);
+				input_file.close();		
+				T.initial_depth=0;
+				loaded_program=true;
+			};
 		} else if(R=="-c"){
 			T.initialize();
 			T.enter_program();
