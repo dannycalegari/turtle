@@ -1,7 +1,8 @@
 **turtle** version 1.2; February 23, 2013
 =======================================
 
-Hyperbolic turtle logo in the hyperbolic plane. This is a variation on the Logo
+Turtle logo in the hyperbolic plane (rendered in the Poincare disk model). 
+This is a variation on the Logo
 programming language, created in 1967 for educational use by Wally Feurzeig and
 Seymour Papert, but has a limited set of commands, and a primitive interface.
 
@@ -62,7 +63,7 @@ where T is the type, and D is the depth. This means the following:
 		* execute_recursive_program(R, transition[T][k], D-1); then
 	* restore the location, orientation and pen color
 
-This makes it possible to write quite complicated recursive procedures quite easily.
+This makes it possible to write complicated recursive procedures quite easily.
 
 file format
 -----------
@@ -72,10 +73,10 @@ elementary commands. The last command should be e 0. The number of elementary co
 
 A file giving a recursive program has the following format:
 
-* an integer e, which is the number of elementary programs
-	* for each i up to e, the code of elementary program i in the format above
+* an integer v, which is the number of elementary programs
+	* for each i up to v, the code of elementary program i in the format above (hence it should start with the number of lines!)
 * an integer t, which is the number of types
-	* for each i up to t, an integer s which is the size of options[i]
+	* for each i up to t, an integer s which is the size of the vector options[i]
 		* for each j up to s, the value of options[i][j]
 		* for each j up to s, the value of transition[i][j]
 		
