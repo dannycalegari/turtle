@@ -83,7 +83,7 @@ A file giving a recursive program has the following format:
 		* for each j up to s, the value of options[i][j]
 		* for each j up to s, the value of transition[i][j]
 		
-Two sample programs, _sample\_elementary\_program.txt_ and _sample\_recursive\_program.txt_ are included.
+Three sample programs _sample\_elementary\_program.txt_, _sample\_recursive\_program.txt_ and _73\_recursive\_program.txt_ are included.
 
 to dos
 ------
