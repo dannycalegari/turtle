@@ -40,6 +40,7 @@ class turtle{
 		// data defining state of turtle, program to execute, etc.
 		recursive_program	prog;
 		bool				verbose;
+		bool				epsout;
 		cmat				state;
 		long				pen_color;
 		int					initial_depth;
@@ -50,8 +51,8 @@ class turtle{
 				
 		// functions to execute program or recursive program
 		
-		void execute_elementary_program(elementary_program P);
-		void execute_recursive_program(recursive_program R, int type, int depth);
+		void execute_elementary_program(elementary_program P, ofstream &output_file);
+		void execute_recursive_program(recursive_program R, int type, int depth, ofstream &output_file);
 		
 		// input
 		
@@ -63,7 +64,8 @@ class turtle{
 		// output 
 		
 		void write_program();
-		void draw_eps();
+		void initialize_eps_output(ofstream &output_file);
+		void close_eps_output(ofstream &output_file);
 		
 		// interface
 		
@@ -74,4 +76,62 @@ void turtle::initialize(){
 	verbose=false;
 	state=turn_mat(PI/2.0);
 	pen_color=0;
+};
+
+void turtle::initialize_eps_output(ofstream &output_file){
+	string S;
+	cin.clear();
+	cout << "Enter name of file to write .eps output to: ";
+	cin.clear();
+
+	getline(cin, S, '\n');
+	if(S.length()<3){
+		S="output.eps";
+	};
+	output_file.open(S.c_str());
+    output_file << "%!PS-Adobe-2.0 EPSF-2.0 \n";
+    output_file << "%%BoundingBox: 0 0 500 500 \n";
+   	output_file << "gsave \n";
+    output_file << "200 200 scale \n";
+    output_file << "1 400 div setlinewidth \n";
+    output_file << "1.25 1.25 translate \n";
+	output_file << "/l {7 dict begin \n";
+	output_file << "	/c3 exch def \n";
+	output_file << "	/c2 exch def \n";
+	output_file << "	/c1 exch def \n";
+	output_file << "	/y2 exch def \n";
+	output_file << "	/x2 exch def \n";
+	output_file << "	/y1 exch def \n";
+	output_file << "	/x1 exch def \n";
+	output_file << "	gsave \n";
+	output_file << "	c1 c2 c3 setrgbcolor \n";
+	output_file << "	newpath \n";
+	output_file << "	x1 y1 moveto \n";
+	output_file << "	x2 y2 lineto \n";
+	output_file << "	stroke \n";
+	output_file << "	grestore \n";
+	output_file << "end} def\n";
+	output_file << "/c {8 dict begin \n";
+	output_file << "	/c3 exch def \n";
+	output_file << "	/c2 exch def \n";
+	output_file << "	/c1 exch def \n";
+	output_file << "	/a2 exch def \n";
+	output_file << "	/a1 exch def \n";
+	output_file << "	/r exch def \n";
+	output_file << "	/y exch def \n";
+	output_file << "	/x exch def \n";
+	output_file << "	gsave \n";
+	output_file << "	c1 c2 c3 setrgbcolor \n";
+	output_file << "	newpath \n";
+	output_file << "	x y r a1 a2 arc \n";
+	output_file << "	stroke \n";
+	output_file << "	grestore \n";
+	output_file << "end} def\n";
+	output_file << "0 0 1 0 360 0 0 0 c \n";
+};
+
+void turtle::close_eps_output(ofstream &output_file){
+	output_file << "grestore \n";
+	output_file << "%eof \n";
+	output_file.close();
 };

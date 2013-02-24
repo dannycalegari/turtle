@@ -55,8 +55,10 @@ cpx I (0.0,1.0);
 int main(int argc, char *argv[]){ 
 	turtle T;
 	ifstream input_file;
+	ofstream output_file;
 	string R,S = "";
 	bool loaded_program;
+	char C;
 	
 	loaded_program=false;
 	
@@ -103,10 +105,25 @@ int main(int argc, char *argv[]){
 		};
 	};
 	if(loaded_program==true){
+		cout << "echo output to .eps file (y/n): ";
+		cin >> C;
+		cin.ignore(256, '\n');
+		if(C=='y'){
+			T.epsout=true;	
+		} else {
+			T.epsout=false;
+		};
+ 		if(T.epsout){
+			T.initialize_eps_output(output_file);
+		};
 		setup_graphics();
 		usleep(100000);
  		draw_circle(cpx_to_point(0.0),400,0);   // draw boundary circle
-		T.execute_recursive_program(T.prog, 0, T.initial_depth);
+
+		T.execute_recursive_program(T.prog, 0, T.initial_depth, output_file);
+		if(T.epsout){
+			T.close_eps_output(output_file);
+		};
 		XFlush(display);
 		T.user_interface();	
 	};

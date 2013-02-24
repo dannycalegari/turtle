@@ -109,3 +109,53 @@ void color_geodesic(cpx u, cpx v, long color){
 	};
 	return;
 };
+
+void eps_color_geodesic(cpx u, cpx v, long color, ofstream &output_file){
+	cpx z;
+	double r;
+	double angle1, angle2;
+	double Rcolor, Gcolor, Bcolor;
+	double A1,A2,A;
+	
+	Rcolor = ((double) (color/(256*256))) / 256.0;
+	Gcolor = ((double) ((color/256)%256)) / 256.0;
+	Bcolor = ((double) (color%256)) / 256.0;
+	if(abs(u)>0.03 && abs(v)>0.03 && abs(u-v)>0.03){	// points are not too close, and far from the origin
+		z=u/v;
+		if(abs(z.imag())<0.03){		// if points are almost on the same radius
+			output_file << u.real() << " " << u.imag() << " " << v.real() << " " << v.imag() << " "
+				<< Rcolor << " " << Gcolor << " " << Bcolor << " l\n";
+		} else {
+			z=circumcenter(u,invert(u),v);	
+			r=abs(u-z);	// radius
+			angle1=arg(u-z);
+			angle2=arg(v-z);
+			A1=(angle1*360.0/TWOPI);
+			A2=(angle2*360.0/TWOPI);
+			A=A2-A1;
+			while(A<0.0){
+				A=A+360.0;
+			};
+			while(A>360.0){
+				A=A-360.0;
+			};
+			if(A<0.6 || A>359.4){
+				output_file << u.real() << " " << u.imag() << " " << v.real() << " " << v.imag() << " "
+					<< Rcolor << " " << Gcolor << " " << Bcolor << " l\n";	
+			} else {
+				if(A>180.0){
+					output_file << z.real() << " " << z.imag() << " " << r << " " << A2 << " " << 360.0-A+A2 << " "
+						<< Rcolor << " " << Gcolor << " " << Bcolor << " c\n";	
+				} else {
+					output_file << z.real() << " " << z.imag() << " " << r << " " << A1 << " " << A+A1 << " "
+						<< Rcolor << " " << Gcolor << " " << Bcolor << " c\n";	
+				};	
+			};
+		};
+	} else {
+		output_file << u.real() << " " << u.imag() << " " << v.real() << " " << v.imag() << " "
+			<< Rcolor << " " << Gcolor << " " << Bcolor << " l\n";
+	};
+	return;
+};
+

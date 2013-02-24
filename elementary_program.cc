@@ -25,7 +25,7 @@ int end_loop_location(elementary_program T, int start_loop_location){
 	};
 };
 
-void turtle::execute_elementary_program(elementary_program P){
+void turtle::execute_elementary_program(elementary_program P, ofstream &output_file){
 	elementary_program Q;
 	cpx z;
 	z=0.0;	// could specify initial position if I like, I suppose
@@ -59,6 +59,9 @@ void turtle::execute_elementary_program(elementary_program P){
 				distance = P[instruction].i/100.0;
 				new_state=state*forward_mat(distance);
 				color_geodesic(mobius(state,z),mobius(new_state,z), pen_color);
+				if(epsout){
+					eps_color_geodesic(mobius(state,z),mobius(new_state,z), pen_color, output_file);
+				};
 				state=new_state;
 				break;
 			case 'r':
@@ -78,7 +81,7 @@ void turtle::execute_elementary_program(elementary_program P){
 					Q.push_back(P[k]);
 				};
 				for(k=0;k<P[instruction].i;k++){	// P[instruction].i is the number of times to execute the loop
-					execute_elementary_program(Q);	// execute the content of the loop
+					execute_elementary_program(Q,output_file);	// execute the content of the loop
 				};
 				instruction=j;
 				break;
@@ -87,7 +90,7 @@ void turtle::execute_elementary_program(elementary_program P){
 				k=rand()%j;	// which instruction shall we execute?
 				Q.clear();	// initialize Q
 				Q.push_back(P[instruction+1+k]);
-				execute_elementary_program(Q);	// execute random instruction
+				execute_elementary_program(Q,output_file);	// execute random instruction
 				instruction=instruction+j;
 				break;
 			default:
