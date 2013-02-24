@@ -6,6 +6,8 @@ This is a variation on the Logo
 programming language, created in 1967 for educational use by Wally Feurzeig and
 Seymour Papert, but has a limited set of commands, and a primitive interface.
 
+![random tree](https://github.com/dannycalegari/turtle/blob/master/random_tree.png)
+
 running the program
 -------------------
 
@@ -94,3 +96,5 @@ copyright
 
 This program is released under the terms of the GNU GPL version 3.0. See the
 attached license file.
+
+![73 grid](https://github.com/dannycalegari/turtle/blob/master/73_grid.png)
