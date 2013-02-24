@@ -89,7 +89,7 @@ Three sample programs _sample\_elementary\_program.txt_, _sample\_recursive\_pro
 
 to dos
 ------
-* add the ability to save the graphical output as an .eps file
+* add mode for real time interaction with the turtle
 
 copyright
 ---------
