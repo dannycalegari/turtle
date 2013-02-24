@@ -23,7 +23,7 @@ elementary program
 An elementary program is a list of commands of the form c i where c is a letter (character)
 and i is a number (double or integer). The meaning of the commands is as follows:
 
-* [p] means pen color; i is an RGB color between 0 and 999
+* [p] means pen color; i is an RGB color between -1 and 999 (-1 means penup)
 * [f] means move forward; i is the step (100 is infinite)
 * [r] means rotate; i is the angle (in degrees)
 * [l] means start loop; i is the number of iterations

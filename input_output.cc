@@ -86,7 +86,7 @@ void turtle::enter_program(){
 	
 	cout << "An elementary turtle program is a list of commands of the form c i\n";
 	cout << "where c is a letter and i is a number.\n";
-	cout << "[p] means pen color; i is an RGB color between 0 and 999\n";
+	cout << "[p] means pen color; i is an RGB color between -1 and 999 (-1 is penup)\n";
 	cout << "[f] means move forward; i is the step (100 is infinite)\n";
 	cout << "[r] means rotate; i is the angle (in degrees)\n";
 	cout << "[l] means start loop; i is the number of iterations\n";

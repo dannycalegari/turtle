@@ -58,9 +58,11 @@ void turtle::execute_elementary_program(elementary_program P, ofstream &output_f
 			case 'f':
 				distance = P[instruction].i/100.0;
 				new_state=state*forward_mat(distance);
-				color_geodesic(mobius(state,z),mobius(new_state,z), pen_color);
-				if(epsout){
-					eps_color_geodesic(mobius(state,z),mobius(new_state,z), pen_color, output_file);
+				if(pen_color>=0){
+					color_geodesic(mobius(state,z),mobius(new_state,z), pen_color);
+					if(epsout){
+						eps_color_geodesic(mobius(state,z),mobius(new_state,z), pen_color, output_file);
+					};
 				};
 				state=new_state;
 				break;
