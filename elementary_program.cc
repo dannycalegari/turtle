@@ -53,7 +53,7 @@ void turtle::execute_elementary_program(elementary_program P){
 		switch(P[instruction].c){
 			case 'p':
 				color=(int) P[instruction].i;	// integer from 0 to 999
-				pen_color=(long) (25*(color%10))+(25*256*((color/10)%10))+(25*256*256*((color/100)%10));
+				pen_color=(long) (26*(color%10))+(26*256*((color/10)%10))+(26*256*256*((color/100)%10));
 				break;
 			case 'f':
 				distance = P[instruction].i/100.0;
