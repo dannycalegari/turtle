@@ -59,6 +59,7 @@ int main(int argc, char *argv[]){
 	string R,S = "";
 	bool loaded_program;
 	char C;
+	int seed;
 	
 	loaded_program=false;
 	
@@ -105,6 +106,9 @@ int main(int argc, char *argv[]){
 		};
 	};
 	if(loaded_program==true){
+		cout << "enter seed for random number generator (integer): ";
+		cin >> seed;
+		srand(seed);
 		cout << "echo output to .eps file (y/n): ";
 		cin >> C;
 		cin.ignore(256, '\n');
