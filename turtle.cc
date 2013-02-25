@@ -6,11 +6,12 @@
 
 	version 1.0 December 15 2012; random walk in hyperbolic plane with prescribed angle and step length
 	version 1.1 January 5 2013; added programming mode
-	version 1.2 February 23 2013; big clean up. incorporated random programming command
+	version 1.2 February 23 2013; big clean up. incorporated recursive programming commands
 
 	Copyright Danny Calegari
 
 	released under the terms of the GNU GPL, version 3.0
+	see attached licence for more details
 */
 
 // standard libraries to include
